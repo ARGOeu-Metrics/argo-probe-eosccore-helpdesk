@@ -24,7 +24,7 @@ def print_help():
         print("-v verbose")
         print("-k token")
 
- def ValidateValues(arguments):
+def ValidateValues(arguments):
         """ Validate values - input values """
 
         if arguments.timeout <= 0:
