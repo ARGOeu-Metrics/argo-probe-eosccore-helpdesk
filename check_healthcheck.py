@@ -12,7 +12,7 @@ import requests
 def print_help():
         """ Print help values."""
 
-        print("usage: check_eosc_helpdesk.py -H -k")
+        print("usage: check_healthcheck.py -H -k")
         print("--- ---- ---- ---- ---- ---- ----\n")
         print("main arguments:")
         print("-H hostname")
