@@ -27,7 +27,7 @@ usage: check_healthcheck.py -K https://eosc-helpdesk.eosc-portal.eu/ -t TOKEN [-
 
 Helpdesk metric script
 required arguments 
- -H URL, --hostname URL     Base URL of B2SHARE instance to test.
+ -H URL, --hostname URL     Base URL of HELPDESK instance to test.
  -k, --token                The token to use for the check 
 
 optional arguments:
