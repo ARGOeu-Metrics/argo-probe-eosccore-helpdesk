@@ -4,9 +4,10 @@ The first one refers to Helpdesk checkhealth . You can see the current health st
 
 
 ## Setting up environment
-This probe has been written for Python 3 
-You may need to install (using e.g. `pip`) the following Python modules as 
-they do not come with original distribution:
+This probe has been written for Python 
+
+You may need to install (using e.g. `pip`) the following Python modules as they do not come with original distribution:
+
 - requests
 - jsonschema
 
