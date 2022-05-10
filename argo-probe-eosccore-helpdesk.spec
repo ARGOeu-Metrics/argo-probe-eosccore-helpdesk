@@ -21,7 +21,7 @@ Nagios probe to check functionality of HELPDESK service
 
 %install
 install -d %{buildroot}/%{_libexecdir}/argo/probes/eosccore-helpdesk
-install -m 755 check_b2share.py %{buildroot}/%{_libexecdir}/argo/probes/eosccore-helpdesk/check_healthcheck.py
+install -m 755 check_healthcheck.py %{buildroot}/%{_libexecdir}/argo/probes/eosccore-helpdesk/check_healthcheck.py
 
 %files
 %dir /%{_libexecdir}/argo
