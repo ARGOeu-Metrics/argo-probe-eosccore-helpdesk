@@ -27,12 +27,12 @@ def ValidateValues(arguments):
     if arguments.timeout <= 0:
         print("CRITICAL - Invalid timeout value: %s\n" % arguments.timeout)
         print_help()
-        exit(2)
+        sys.exit(2)
 
-    if arguments.hostname is None:
-        print("CRITICAL - No hostname provided\n")
+    if arguments.url is None:
+        print("CRITICAL - No URL provided\n")
         print_help()
-        exit(2)
+        sys.exit(2)
 
     if arguments.token is None:
         print(
@@ -40,15 +40,15 @@ def ValidateValues(arguments):
             "Token is needed to fetch the healthcheck\n"
         )
         print_help()
-        exit(2)
+        sys.exit(2)
 
-    if not arguments.hostname.startswith("http"):
+    if not arguments.url.startswith("http"):
         print(
-                "CRITICAL - No schema supplied with hostname, "
-                "did you mean https://%s?\n" % arguments.hostname
+                "CRITICAL - No schema supplied with URL, "
+                "did you mean https://%s?\n" % arguments.url
         )
         print_help()
-        exit(2)
+        sys.exit(2)
 
 
 def debugValues(arguments):
@@ -57,7 +57,7 @@ def debugValues(arguments):
             arguments: the input arguments
     """
     if arguments.debug:
-        print("[debugValues] - hostname: %s" % arguments.hostname)
+        print("[debugValues] - URl: %s" % arguments.url)
     if arguments.token != '':
         print("[debugValues] - token: %s" % arguments.token)
     if arguments.timeout != '':
@@ -109,14 +109,19 @@ def checkHealth(url, timeout):
             return description, exit_code
 
 
-def printResult(description, exit_code):
+def printResult(description, exit_code, arguments):
     """ Print the predefined values
         Args:
             description: the nagios description
             exit_code: the code that should be returned to nagios
+            arguments: probe arguments
     """
 
     print(description)
+
+    if arguments.debug > 0:
+        debugValues(arguments)
+
     sys.exit(exit_code)
 
 
@@ -125,7 +130,7 @@ def main():
         description='EOSC Helpdesk metric Supports healthcheck.'
     )
     parser.add_argument(
-        "--hostname", "-H", help='The Hostname of EOSC Helpdesk service'
+        "--url", "-u", help='The URL of EOSC Helpdesk service'
     )
     parser.add_argument(
         "--timeout", "-t", metavar="seconds", type=int, default=30,
@@ -142,18 +147,12 @@ def main():
     arguments = parser.parse_args()
     ValidateValues(arguments)
 
-    if arguments.debug > 0:
-        debugValues(arguments)
+    url = arguments.url
+    url = url + '/api/v1/monitoring/health_check?token=' + arguments.token
 
-    url = arguments.hostname
-    url = url + 'api/v1/monitoring/health_check?token=' + arguments.token
     description, exit_code = checkHealth(url, arguments.timeout)
 
-    # Health check failed, unable to continue
-    if exit_code > 0:
-        printResult(description, exit_code)
-
-    printResult(description, exit_code)
+    printResult(description, exit_code, arguments)
 
 
 if __name__ == "__main__":
