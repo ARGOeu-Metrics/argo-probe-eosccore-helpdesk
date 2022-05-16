@@ -58,8 +58,6 @@ def debugValues(arguments):
     """
     if arguments.debug:
         print("[debugValues] - URl: %s" % arguments.url)
-    if arguments.token != '':
-        print("[debugValues] - token: %s" % arguments.token)
     if arguments.timeout != '':
         print("[debugValues] - timeout: %s" % arguments.timeout)
     if arguments.debug != '':
