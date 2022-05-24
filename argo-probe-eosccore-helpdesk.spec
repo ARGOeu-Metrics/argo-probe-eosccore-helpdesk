@@ -35,4 +35,3 @@ install -m 755 check_healthcheck.py %{buildroot}/%{_libexecdir}/argo/probes/eosc
 - ARGO-3828 Improve probe argo-probe-eosccore-helpdesk
 * Tue May 10 2022 Themis Zamani <themiszamani@gmail.com> - 1.0
 - Initial version of the package.
-
