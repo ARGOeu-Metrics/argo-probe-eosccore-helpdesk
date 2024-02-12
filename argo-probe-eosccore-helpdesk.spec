@@ -9,7 +9,9 @@ Source:		%{name}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 AutoReqProv:    no
-Requires:       python-requests, python2-jsonschema
+
+BuildRequires: python3-devel
+Requires:      python36-requests
 
 %description
 Nagios probe to check functionality of HELPDESK service
