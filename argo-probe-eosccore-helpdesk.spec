@@ -1,3 +1,5 @@
+%global __python %{python3}
+
 Name:		argo-probe-eosccore-helpdesk
 Version:	1.0.1
 Release:	1%{?dist}
