@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import argparse
 import sys
 
@@ -15,7 +15,7 @@ def print_help():
     print("-k token")
     print("\n")
     print("optional arguments:")
-    print(" -h, --help  show this help message and exit")
+    print("-h, --help  show this help message and exit")
     print("-t timeout")
     print("-v verbose")
     print("-k token")
@@ -25,7 +25,7 @@ def ValidateValues(arguments):
     """ Validate values - input values """
 
     if arguments.timeout <= 0:
-        print("CRITICAL - Invalid timeout value: %s\n" % arguments.timeout)
+        print(f"CRITICAL - Invalid timeout value: {arguments.timeout}\n")
         print_help()
         sys.exit(2)
 
@@ -44,8 +44,8 @@ def ValidateValues(arguments):
 
     if not arguments.url.startswith("http"):
         print(
-                "CRITICAL - No schema supplied with URL, "
-                "did you mean https://%s?\n" % arguments.url
+                f"CRITICAL - No schema supplied with URL, "
+                f"did you mean https://{arguments.url}?\n"
         )
         print_help()
         sys.exit(2)
@@ -57,11 +57,11 @@ def debugValues(arguments):
             arguments: the input arguments
     """
     if arguments.debug:
-        print("[debugValues] - URl: %s" % arguments.url)
+        print(f"[debugValues] - URl: {arguments.url}")
     if arguments.timeout != '':
-        print("[debugValues] - timeout: %s" % arguments.timeout)
+        print(f"[debugValues] - timeout: {arguments.timeout}")
     if arguments.debug != '':
-        print("[debugValues] - verbose: %s" % arguments.debug)
+        print(f"[debugValues] - verbose: {arguments.debug}")
 
 
 def checkHealth(url, timeout):
@@ -89,7 +89,7 @@ def checkHealth(url, timeout):
         return description, exit_code
 
     elif out.status_code != 200:
-        description = "WARNING - Unexpected status code %s" % out.status_code
+        description = f"WARNING - Unexpected status code {out.status_code}"
         exit_code = 1
         return description, exit_code
 
@@ -98,11 +98,11 @@ def checkHealth(url, timeout):
         message = out.json()['message']
 
         if health is True:
-            description = "OK - Service reachable:  %s" % message
+            description = f"OK - Service reachable: {message}"
             exit_code = 0
             return description, exit_code
         else:
-            description = "CRITICAL - Unexpected response: %s" % message
+            description = f"CRITICAL - Unexpected response: {message}"
             exit_code = 1
             return description, exit_code
 
@@ -146,7 +146,7 @@ def main():
     ValidateValues(arguments)
 
     url = arguments.url
-    url = url + '/api/v1/monitoring/health_check?token=' + arguments.token
+    url = f"{url}/api/v1/monitoring/health_check?token={arguments.token}"
 
     description, exit_code = checkHealth(url, arguments.timeout)
 

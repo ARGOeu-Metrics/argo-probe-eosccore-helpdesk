@@ -1,3 +1,5 @@
+%global __python %{python3}
+
 Name:		argo-probe-eosccore-helpdesk
 Version:	1.0.1
 Release:	1%{?dist}
@@ -9,7 +11,9 @@ Source:		%{name}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 AutoReqProv:    no
-Requires:       python-requests, python2-jsonschema
+
+BuildRequires: python3-devel
+Requires:      python36-requests
 
 %description
 Nagios probe to check functionality of HELPDESK service
