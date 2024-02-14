@@ -88,23 +88,28 @@ def checkHealth(url, timeout):
         exit_code = 3
         return description, exit_code
 
-    elif out.status_code != 200:
-        description = f"WARNING - Unexpected status code {out.status_code}"
-        exit_code = 1
-        return description, exit_code
-
     else:
-        health = out.json()['healthy']
-        message = out.json()['message']
-
-        if health is True:
-            description = f"OK - Service reachable: {message}"
-            exit_code = 0
-            return description, exit_code
-        else:
-            description = f"CRITICAL - Unexpected response: {message}"
+        perf_data = \
+            f"|time={out.elapsed.total_seconds()}s;size={len(out.content)}B"
+        if out.status_code != 200:
+            description = \
+                f"WARNING - Unexpected status code {out.status_code}{perf_data}"
             exit_code = 1
             return description, exit_code
+
+        else:
+            health = out.json()['healthy']
+            message = out.json()['message']
+
+            if health is True:
+                description = f"OK - Service reachable: {message}{perf_data}"
+                exit_code = 0
+                return description, exit_code
+            else:
+                description = \
+                    f"CRITICAL - Unexpected response: {message}{perf_data}"
+                exit_code = 1
+                return description, exit_code
 
 
 def printResult(description, exit_code, arguments):
