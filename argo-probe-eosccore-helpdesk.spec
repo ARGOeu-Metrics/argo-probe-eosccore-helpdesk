@@ -1,19 +1,27 @@
 %global __python %{python3}
 
-Name:		argo-probe-eosccore-helpdesk
-Version:	1.1.0
-Release:	1%{?dist}
-Summary:	Monitoring scripts that check the functionalities of HELPDESK
-License:	GPLv3+
-Packager:	Themis Zamani <themiszamani@gmail.com>
+Name:		 argo-probe-eosccore-helpdesk
+Version:	 1.1.0
+Release:	 1%{?dist}
+Summary:	 Monitoring scripts that check the functionalities of HELPDESK
+License:	 GPLv3+
+Packager:	 Themis Zamani <themiszamani@gmail.com>
 
-Source:		%{name}-%{version}.tar.gz
-BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
-AutoReqProv:    no
+Source:		 %{name}-%{version}.tar.gz
+BuildArch:	 noarch
+BuildRoot:	 %{_tmppath}/%{name}-%{version}
+AutoReqProv: no
 
 BuildRequires: python3-devel
+
+%if 0%{?el7}
 Requires:      python36-requests
+
+%else
+Requires:      python3-requests
+
+%endif
+
 
 %description
 Nagios probe to check functionality of HELPDESK service
