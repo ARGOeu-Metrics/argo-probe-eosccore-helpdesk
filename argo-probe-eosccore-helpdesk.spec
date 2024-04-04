@@ -1,7 +1,7 @@
 %global __python %{python3}
 
 Name:		 argo-probe-eosccore-helpdesk
-Version:	 1.1.0
+Version:	 1.1.1
 Release:	 1%{?dist}
 Summary:	 Monitoring scripts that check the functionalities of HELPDESK
 License:	 GPLv3+
@@ -43,6 +43,8 @@ install -m 755 check_healthcheck.py %{buildroot}/%{_libexecdir}/argo/probes/eosc
 %attr(0755,root,root) /%{_libexecdir}/argo/probes/eosccore-helpdesk/check_healthcheck.py
 
 %changelog
+* Thu Apr 4 2024 Katarina Zailac <kzailac@srce.hr> - 1.1.1-1
+- AO-932 Create Rocky 9 RPM for argo-probe-eosccore-helpdesk
 * Thu Mar 7 2024 Katarina Zailac <kzailac@srce.hr> - 1.1.0-1
 - ARGO-4475 Add performance data to argo-probe-eosccore-helpdesk
 - ARGO-4479 Rewrite argo-probe-eosccore-helpdesk to use Py3
