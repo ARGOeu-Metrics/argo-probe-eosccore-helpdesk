@@ -24,7 +24,7 @@ pipeline {
                         echo 'Building CentOS 7 RPM...'
                         withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'jenkins-rpm-repo', usernameVariable: 'REPOUSER', \
                                                                     keyFileVariable: 'REPOKEY')]) {
-                            sh "/home/jenkins/build-rpm.sh -w ${WORKSPACE} -b ${BRANCH_NAME} -d centos7 -p ${PROJECT_DIR} -s $REPOKEY"
+                            sh "/home/jenkins/build-rpm.sh -w ${WORKSPACE} -b ${BRANCH_NAME} -d centos7 -p ${PROJECT_DIR} -s ${REPOKEY}"
                         }
                         archiveArtifacts artifacts: '**/*.rpm', fingerprint: true
                     }
@@ -40,7 +40,7 @@ pipeline {
                         echo 'Building Rocky 9 RPM...'
                         withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'jenkins-rpm-repo', usernameVariable: 'REPOUSER', \
                                                                     keyFileVariable: 'REPOKEY')]) {
-                            sh "/home/jenkins/build-rpm.sh -w ${WORKSPACE} -b ${BRANCH_NAME} -d rocky9 -p ${PROJECT_DIR} -s $REPOKEY"
+                            sh "/home/jenkins/build-rpm.sh -w ${WORKSPACE} -b ${BRANCH_NAME} -d rocky9 -p ${PROJECT_DIR} -s ${REPOKEY}"
                         }
                         archiveArtifacts artifacts: '**/*.rpm', fingerprint: true
                     }
